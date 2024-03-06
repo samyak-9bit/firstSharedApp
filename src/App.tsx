@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
 import { Text, View, StyleSheet, TextInput, Button, TouchableOpacity, Platform } from 'react-native';
+// For web
+import { buttonStyle } from './btnStyle';
+// For Android
+// import { buttonStyle } from './btnStyle.android';
+
 
 interface TodoItem {
   task: string;
@@ -67,7 +72,7 @@ function App() {
         />
         <TouchableOpacity
           onPress={addTask}
-          style={[styles.button, { backgroundColor: '#198cff' }]}
+          style={buttonStyle.button}
         >
           <Text style={styles.buttonText}>ADD</Text>
         </TouchableOpacity>
@@ -158,14 +163,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     fontWeight: 'bold',
     color: 'black',
-  },
-  button: {
-    height: 40,
-    width: 110,
-    borderRadius: 40,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginLeft: Platform.OS === 'web'? 5 : 0
   },
   errorMessage: {
     fontSize: 15,
