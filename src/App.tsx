@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View, StyleSheet, TextInput, Button } from 'react-native';
+import { Text, View, StyleSheet, TextInput, Button, TouchableOpacity, Platform } from 'react-native';
 
 interface TodoItem {
   task: string;
@@ -58,18 +58,20 @@ function App() {
       </View>
       <View style={styles.content}>
         <Text style={styles.inputLabel}>Write a new task you want to add.</Text>
+        <View style={styles.responsive}>
         <TextInput
           value={newTask}
           onChangeText={handleNewTaskChange}
           style={styles.input}
           placeholder="Enter here..."
         />
-        <Button
-          title="ADD"
+        <TouchableOpacity
           onPress={addTask}
-          color="#198cff"
-          style={styles.button}
-        />
+          style={[styles.button, { backgroundColor: '#198cff' }]}
+        >
+          <Text style={styles.buttonText}>ADD</Text>
+        </TouchableOpacity>
+        </View>
         <Text style={styles.errorMessage}>{err}</Text>
         <View style={styles.tasksContainer}>
           {todos.map(todo => (
@@ -147,6 +149,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontFamily: 'lucida sans',
   },
+  buttonText: {
+    color: 'white',
+    fontWeight: 'bold',
+  },
   inputLabel: {
     fontSize: 16,
     marginBottom: 10,
@@ -157,9 +163,9 @@ const styles = StyleSheet.create({
     height: 40,
     width: 110,
     borderRadius: 40,
-    backgroundColor: '#198cff',
     justifyContent: 'center',
     alignItems: 'center',
+    marginLeft: Platform.OS === 'web'? 5 : 0
   },
   errorMessage: {
     fontSize: 15,
@@ -192,6 +198,11 @@ const styles = StyleSheet.create({
   buttonContainer: {
     marginHorizontal: 5,
   },
+  responsive:{
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: Platform.OS==='web' ? 'row' : 'column'
+  }
 });
 
 export default App;
