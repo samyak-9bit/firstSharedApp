@@ -1,5 +1,4 @@
 import { StyleSheet } from "react-native";
-import { Platform } from "react-native";
 
 export const buttonStyle = StyleSheet.create({
     button: {
@@ -9,6 +8,6 @@ export const buttonStyle = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginLeft: 5,
-        backgroundColor: Platform.OS==='web'? 'black' : 'blue', 
+        backgroundColor: 'black', 
       },
 })

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Text, View, StyleSheet, TextInput, Button, TouchableOpacity, Platform } from 'react-native';
 // For web
-import { buttonStyle } from './btnStyle';
+import { buttonStyle } from './btnStyle.web';
 // For Android
 // import { buttonStyle } from './btnStyle.android';
 
@@ -68,11 +68,13 @@ function App() {
           value={newTask}
           onChangeText={handleNewTaskChange}
           style={styles.input}
+          testID='taskInput'
           placeholder="Enter here..."
         />
         <TouchableOpacity
           onPress={addTask}
           style={buttonStyle.button}
+          testID='addTaskBtn'
         >
           <Text style={styles.buttonText}>ADD</Text>
         </TouchableOpacity>
@@ -83,6 +85,7 @@ function App() {
             <View key={todo.id} style={styles.taskContainer}>
               <View style={styles.taskContent}>
                 <TextInput
+                  testID="taskText"
                   style={[
                     styles.taskText,
                     {
@@ -100,6 +103,7 @@ function App() {
                     title="Delete"
                     onPress={() => deleteTask(todo.id)}
                     color="red"
+                    testID='dltTaskBtn'
                   />
                 </View>
                 <View style={styles.buttonContainer}>
