@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Text, View, StyleSheet, TextInput, Button, TouchableOpacity, Platform } from 'react-native';
-// For web
-import { buttonStyle } from './btnStyle.web';
-// For Android
-// import { buttonStyle } from './btnStyle.android';
+// @ts-ignore
+import { buttonStyle } from './btnStyle.android';
+
 
 
 interface TodoItem {
@@ -80,12 +79,11 @@ function App() {
         </TouchableOpacity>
         </View>
         <Text style={styles.errorMessage}>{err}</Text>
-        <View style={styles.tasksContainer}>
+        <View style={styles.tasksContainer} testID="taskText">
           {todos.map(todo => (
             <View key={todo.id} style={styles.taskContainer}>
               <View style={styles.taskContent}>
-                <TextInput
-                  testID="taskText"
+                <TextInput 
                   style={[
                     styles.taskText,
                     {

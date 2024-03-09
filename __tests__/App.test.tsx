@@ -1,3 +1,4 @@
+/* eslint-disable testing-library/render-result-naming-convention */
 /**
  * @format
  */
@@ -18,6 +19,7 @@ import {it} from '@jest/globals';
 
 // Note: test renderer must be required after react-native.
 import renderer from 'react-test-renderer';
+import { TextInput } from 'react-native';
 
 
 it('renders correctly', () => {
@@ -26,13 +28,17 @@ it('renders correctly', () => {
 
 describe('Todo Component', () => {
   
-  // it("should add a new task", async () => {
-  //   const appRender = render(<App />);
-  //   const input = appRender.getByTestId('taskInput');
-  //   fireEvent.changeText(input, 'New Task');
-  //   fireEvent.press(appRender.getByTestId('addTaskBtn'));
-  //   await waitFor(() => expect(appRender.getByText('New Task')).toBeTruthy());
-  // });
+  it("should add a new task", async () => {
+    const appRender = render(<App />);
+    const input = appRender.getByTestId('taskInput');
+    fireEvent.changeText(input, 'myTask');
+    fireEvent.press(appRender.getByTestId('addTaskBtn'));
+    const taskText = await waitFor(() => appRender.getByTestId('taskText'));
+    const textInput = taskText.findByType(TextInput);
+    expect(textInput.props.value).toBe('myTask');
+  });
+  
+  
 
   it("should show error message for empty task", () => {
     const appRender = render(<App />);
@@ -53,16 +59,16 @@ describe('Todo Component', () => {
   });
   
 
-  // it("should edit a task", ()=>{
-  //   const appRender = render(<App />);
-  //   const input = appRender.getByTestId('taskInput');
-  //   fireEvent.changeText(input, 'New Task');
-  //   fireEvent.press(appRender.getByTestId('addTaskBtn'));
-  //   const task = appRender.getByTestId('taskText');
-  //   fireEvent.changeText(task,'Edited task');
-  //   expect(appRender.getByText('Edited task')).toBeTruthy();
-
-  // })
+  it("should edit a task", async()=>{
+    const appRender = render(<App />);
+    const input = appRender.getByTestId('taskInput');
+    fireEvent.changeText(input, 'myTask');
+    fireEvent.press(appRender.getByTestId('addTaskBtn'));
+    const taskText = await waitFor(() => appRender.getByTestId('taskText'));
+    const textInput = taskText.findByType(TextInput);
+    fireEvent.changeText(textInput, 'editedTask');
+    expect(textInput.props.value).toBe('editedTask');
+  })
 
   it('input field is defined', () => {
     const appRender = render(<App />);
