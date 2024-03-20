@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Text, View, StyleSheet, TextInput, Button, TouchableOpacity, Platform } from 'react-native';
 // @ts-ignore
-import { buttonStyle } from './btnStyle.android';
+import { buttonStyle } from './btnStyle';
 
 
 

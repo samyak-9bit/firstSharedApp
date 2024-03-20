@@ -1,3 +1,7 @@
+/* eslint-disable testing-library/no-promise-in-fire-event */
+/* eslint-disable testing-library/await-async-query */
+/* eslint-disable testing-library/no-wait-for-side-effects */
+/* eslint-disable testing-library/prefer-screen-queries */
 /* eslint-disable testing-library/render-result-naming-convention */
 /**
  * @format
@@ -9,8 +13,6 @@ import App from '../src/App';
 import {
   render,
   fireEvent,
-  waitFor,
-  screen,
 } from '@testing-library/react-native';
 import '@testing-library/jest-native/extend-expect';
 
@@ -33,7 +35,7 @@ describe('Todo Component', () => {
     const input = appRender.getByTestId('taskInput');
     fireEvent.changeText(input, 'myTask');
     fireEvent.press(appRender.getByTestId('addTaskBtn'));
-    const taskText = await waitFor(() => appRender.getByTestId('taskText'));
+    const taskText = await appRender.findByTestId('taskText');
     const textInput = taskText.findByType(TextInput);
     expect(textInput.props.value).toBe('myTask');
   });
@@ -64,7 +66,7 @@ describe('Todo Component', () => {
     const input = appRender.getByTestId('taskInput');
     fireEvent.changeText(input, 'myTask');
     fireEvent.press(appRender.getByTestId('addTaskBtn'));
-    const taskText = await waitFor(() => appRender.getByTestId('taskText'));
+    const taskText = await appRender.findByTestId('taskText');
     const textInput = taskText.findByType(TextInput);
     fireEvent.changeText(textInput, 'editedTask');
     expect(textInput.props.value).toBe('editedTask');
